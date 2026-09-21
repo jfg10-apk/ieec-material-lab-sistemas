@@ -14,11 +14,11 @@
 
 
 // Metrics (Consultar guia e documentação do HC-SR04 (Link no guia)))
-#define DEFAULT_DIST  20.0f
-#define DEFAULT_TOLER // tolerance [.%] - Completar e explicar a necessidade
-#define TOO_CLOSE_DIST  // - Completar...
-#define TOO_FAR_DIST  // - Completar...
-#define OUT_OF_RANGE 999.0f // (Não se correlaciona exatamente com o alcance do aparelho)
+#define DEFAULT_DIST  20.0f // [cm]
+#define DEFAULT_TOLER // tolerance [cm] - Completar e explicar a necessidade
+#define TOO_CLOSE_DIST  // - Completar... [cm]
+#define TOO_FAR_DIST  // - Completar... [cm]
+#define OUT_OF_RANGE 999.0f // (Não se correlaciona exatamente com o alcance do aparelho) [cm]
 
 
 // States (switch-case na função void loop())

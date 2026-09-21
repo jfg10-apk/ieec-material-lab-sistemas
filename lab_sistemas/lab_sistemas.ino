@@ -29,6 +29,7 @@ void setup() {
   motorInit(15); // de 12 RPM
 
   // TODO: Inicializar periférico
+  
   // TODO: Inicializar botão de calibração
 
   Serial.println("Sonar READY!");
