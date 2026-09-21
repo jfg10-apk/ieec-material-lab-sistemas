@@ -26,20 +26,72 @@ void printError(char *input, float dist, float ref, float tol){
   Serial.println(input);
 }
 
-void recordNewDist(float maj, float min, float dist){
+
+
+/***
+ * Começar a editar as funções a partir daqui.
+ */
+
+void recordNewDist(float maj, float min, float dist, float ref){
+	ref = dist;
+	/*
+	maj = ???;
+	min = ???;
+	if(maj > ???) maj = ???;
+  if(min < ???) min = ???;
+	*/
+}
+
+
+// Objetivo: "Foca-se" quando objeto está perto e "varre" quando se encontra longe.
+int stateCase1(float dist, float min, float maj, int last_state){
+  if (dist < min) 
+  {
+      if(/*last_state == */){
+        //Serial.println("Focusing on close object...");
+        /*return ;*/
+      }
+      else return SEARCHING;
+  }
+
+  if(dist > maj)
+  {
+      if (/*last_state == */){
+        //Serial.println("Object lost, searching...");
+        /*return ;*/
+      }
+      else return IN_FOCUS;
+  }
+}
+
+// Objetivo: "Foca-se" quando objeto está a uma determinada distância. C.C., faz o varrimento.
+int stateCase2(float dist, float min, float maj){
+	if(/*(dist > ???) && (dist < ???)*/){
+
+	}else{
+		return SEARCHING;
+	}
 
 }
 
-int stateCase1(float dist, float min, float maj){
-
-}
-
-int stateCase2(float dist, float ref, float min, float maj, int last_state){
-
-}
-
+// Objetivo: stateCase2() + Verifica medida fidedigna + Calibração
 int stateCase2Extended(float dist, float ref, float min, float maj, int last_state){
+	if(/*(dist > ???) || (dist < ???)*/){
+		
+		return CALIBRATING;
+	}
 
+	if(/*(dist > ???) || (dist < ???)*/){
+		//Serial.println("Warning! Possible bad measurement...");
+		return WARNING;
+	}
+
+	if(/*(dist > ???) && (dist < ???)*/){
+		//Serial.println("Object found! Focusing...");
+		//return ???;
+	}else{
+		//return ???;
+	}
 }
 
 
@@ -48,7 +100,7 @@ int stateCase1Wrong(float dist){
 
   if (dist < DEFAULT_DIST) {
       //Serial.println("Focusing on close object...");
-      return IN_PROXIMITY;
+      return IN_FOCUS;
   
   }else{
       Serial.println("Object lost, searching...");
@@ -62,7 +114,7 @@ int stateCase2Wrong(float dist){
 
   if (dist == DEFAULT_DIST) {
       //Serial.println("Focusing on close object...");
-      return IN_PROXIMITY;
+      return IN_FOCUS;
   
   }else{
       Serial.println("Object lost, searching...");
