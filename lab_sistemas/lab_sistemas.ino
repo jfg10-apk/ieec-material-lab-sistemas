@@ -39,11 +39,20 @@ void setup() {
 void loop() {
   // 1. LEITURA:
   dist = sonarRead();
+  /***
+   * // Para testar sem o sensor HC-SR04 basta apenas injetar um valor manualmente no código.
+   * 
+   * Exemplos:
+   * dist = 10.0f;  // Que vai corresponder a: (state == IN_FOCUS (CASE 1) / state == SEARCHING (CASE 2))
+   * dist = 30.0f;  // Que vai corresponder a: (state == SEARCHING (CASE 1) / state == SEARCHING (CASE 2))
+   * 
+   * // Desta forma poderá testar o sensor remotamente!
+   */
   
 
   // 2. DECISÃO (Lógica com histerese):
   state = stateCase1Wrong(dist); 
-  // Este caso functionará. Porém falta implementar o Schmitt trigger
+  // Alterar para stateCase1(), stateCase2() ou stateCase2Extended() consoante o que estiver a experimentar...
 
 
   // 3. AÇÃO (Baseada no estado atual)
@@ -53,7 +62,7 @@ void loop() {
       // Ex.: ledWrite(Y_PIN);
       break;
       
-    case IN_PROXIMITY:
+    case IN_FOCUS:
       // O motor não faz nada, mantendo a posição trancada no alvo
       // Ex.: ledWrite(G_PIN);
       break;
