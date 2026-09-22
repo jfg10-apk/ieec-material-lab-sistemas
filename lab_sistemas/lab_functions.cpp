@@ -45,18 +45,18 @@ void recordNewDist(float maj, float min, float dist, float ref){
 
 // Objetivo: "Foca-se" quando objeto está perto e "varre" quando se encontra longe.
 int stateCase1(float dist, float min, float maj, int last_state){
-  if (dist < min) 
+  if (/*last_state == */) 
   {
-      if(/*last_state == */){
+      if(dist < min){
         //Serial.println("Focusing on close object...");
         /*return ;*/
       }
       else return SEARCHING;
   }
 
-  if(dist > maj)
+  if(/*last_state == */)
   {
-      if (/*last_state == */){
+      if (dist > maj){
         //Serial.println("Object lost, searching...");
         /*return ;*/
       }
