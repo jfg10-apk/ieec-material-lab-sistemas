@@ -4,6 +4,7 @@
 
 ## Conteúdos:
 - teste_HCSR04: Para testar o sensor
+- test_28BYJ48: Para testar o atuador
 - lab_sistemas: Conteúdo para a sessão laboratorial
 
 ### Bom trabalho
