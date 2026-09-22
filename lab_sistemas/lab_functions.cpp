@@ -33,8 +33,8 @@ void printError(char *input, float dist, float ref, float tol){
  */
 
 void recordNewDist(float maj, float min, float dist, float ref){
-	ref = dist;
 	/*
+	ref = ???;
 	maj = ???;
 	min = ???;
 	if(maj > ???) maj = ???;
@@ -78,12 +78,12 @@ int stateCase2(float dist, float min, float maj){
 int stateCase2Extended(float dist, float ref, float min, float maj, int last_state){
 	if(/*(dist > ???) || (dist < ???)*/){
 		
-		return CALIBRATING;
+		///return ???;
 	}
 
 	if(/*(dist > ???) || (dist < ???)*/){
 		//Serial.println("Warning! Possible bad measurement...");
-		return WARNING;
+		// return ???;
 	}
 
 	if(/*(dist > ???) && (dist < ???)*/){
