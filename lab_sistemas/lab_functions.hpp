@@ -29,56 +29,35 @@ void printError(char *input, float dist, float ref, float tol);
  * @param dist New reference distance
  * @param ref Reference distance
  */
-void recordNewDist(float maj, float min, float dist, float ref);
+void recordNewDist(float *maj, float *min, float dist, float *ref);
 
 /**
- * @brief Returns the state of the circuit in Case 1. Uses Smichtt Trigger to commute the state. Stops if the distance detected is considered less than the reference.
+ * @brief Returns the state of the circuit in Case 1. No Schmitt trigger.
  * 
  * @param dist Distance between the sensor and the obstacle
- * @param min Lower bound
- * @param maj Upper bound
+ * @param ref Reference distance
  * @return int 
  */
-int stateCase1(float dist, float min, float maj);
+int stateCase1(float dist, float ref);
 
 /**
  * @brief Returns the state of the circuit in Case 2. Uses an interval to detect an object distancing a determined value from the sensor
  * 
  * @param dist Current distance
- * @param ref Reference distance
  * @param min Lower bound
  * @param maj Upper bound
- * @param last_state 
  * @return int 
  */
-int stateCase2(float dist, float ref, float min, float maj, int last_state);
+int stateCase2(float dist, float min, float maj);
 
 /**
- * @brief 
+ * @brief stateCase2() + Verifies measurement + Cablibration
  * 
  * @param dist Current distance
- * @param ref Reference distance
  * @param min Lower bound
  * @param maj Upper bound
- * @param last_state 
  * @return int 
  */
-int stateCase2Extended(float dist, float ref, float min, float maj, int last_state);
-
-/**
- * @brief Wrong example of Case 1
- * 
- * @param dist Measured distance
- * @return int 
- */
-int stateCase1Wrong(float dist);
-
-/**
- * @brief Wrong example of Case 2
- * 
- * @param dist Measured distance
- * @return int 
- */
-int stateCase2Wrong(float dist);
+int stateCase2Extended(float dist, float min, float maj);
 
 #endif

@@ -19,6 +19,7 @@ uint8_t last_state = WARNING;
 
 // Globals
 float dist = 0.0f;
+float tol = DEFAULT_TOLER;
 
 
 void setup() {
@@ -29,16 +30,20 @@ void setup() {
   motorInit(15); // de 12 RPM
 
   // TODO: Inicializar periférico
+  ledInit(R_PIN,Y_PIN,G_PIN);
   
   // TODO: Inicializar botão de calibração
+  pinMode(CALIBRATION_BUTTON, INPUT_PULLUP);
 
   Serial.println("Sonar READY!");
   delay(2000);
 }
 
 void loop() {
+  // ---
   // 1. LEITURA:
   dist = sonarRead();
+
   /***
    * // Para testar sem o sensor HC-SR04 basta apenas injetar um valor manualmente no código.
    * 
@@ -50,31 +55,37 @@ void loop() {
    */
   
 
+  // ---
   // 2. DECISÃO (Lógica com histerese):
-  state = stateCase1Wrong(dist); 
-  // Alterar para stateCase1(), stateCase2() ou stateCase2Extended() consoante o que estiver a experimentar...
+  // state = stateCase1(dist, ref);
+  // state = stateCase2(dist, min, maj);
+  state = stateCase2Extended(dist, min, maj);
 
 
+  // ---
   // 3. AÇÃO (Baseada no estado atual)
   switch (state) {
     case SEARCHING:
       motorSweep();
-      // Ex.: ledWrite(Y_PIN);
+      printLogs("Searching new object...",dist,ref,tol);
+      ledWrite(R_PIN);
       break;
       
     case IN_FOCUS:
-      // O motor não faz nada, mantendo a posição trancada no alvo
-      // Ex.: ledWrite(G_PIN);
+      printLogs("Focusing on close object...",dist,ref,tol);
+      ledWrite(G_PIN);
       break;
 
     case CALIBRATING:
-      // recordNewDist(dist, min, maj);
-      // Ex.: ledWrite(Y_PIN);
+      Serial.println("Calibrating...");
+      recordNewDist(&maj, &min, dist, &ref);
+      ledWrite(Y_PIN);
       break;
 
     default:
       // Erro
-      // Ex.: ledWarning(R_PIN);
+      printError("Error!", dist, ref, tol);
+      ledWarning();
       break;
   }
 
