@@ -62,6 +62,7 @@ int stateCase1(float dist, float min, float maj, int last_state){
       }
       else return IN_FOCUS;
   }
+  return WARNING;
 }
 
 // Objetivo: "Foca-se" quando objeto está a uma determinada distância. C.C., faz o varrimento.
